@@ -1,0 +1,23 @@
+<snippet>
+  <tabTrigger>vhdl</tabTrigger>
+  <scope>source.vhdl</scope>
+  <content>library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity ${1:${TM_FILENAME/(.*?)(-.*\..+)/$1/}} is
+  port (
+    clk_i : in std_ulogic;
+    rst_i : in std_ulogic;
+    $3
+  );
+end entity;
+
+architecture ${2:rtl} of ${1:${TM_FILENAME/(.*?)(-.*\..+)/$1/}} is
+
+begin
+
+end architecture;
+</content>
+  <description>vhdl template</description>
+</snippet>

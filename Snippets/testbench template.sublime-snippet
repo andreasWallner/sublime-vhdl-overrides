@@ -1,0 +1,43 @@
+<snippet>
+  <tabTrigger>tb</tabTrigger>
+  <scope>source.vhdl</scope>
+  <content>library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+library work;
+use work.simulation.all;
+
+entity ${1:${TM_FILENAME/(.*?)(-.*\..+)/$1/}} is
+end entity;
+
+architecture ${2:beh} of ${1:${TM_FILENAME/(.*?)(-.*\..+)/$1/}} is
+  signal clk : std_ulogic;
+  signal rst : std_ulogic;
+begin
+  tb_clk: entity work.tb_clk(beh)
+    generic map (
+        period =&gt; 10 ns,
+        reset_count =&gt; 10
+    )
+    port map (
+        clk_o =&gt; clk,
+        rst_o =&gt; rst
+    );
+
+  dut: entity work.${3:${TM_FILENAME/tb_(.*?)(-.*\..+)/$1/}}(${4:rtl})
+    port map (
+      clk_i =&gt; clk,
+      rst_i =&gt; rst,
+      $0
+    )
+
+  process
+  begin
+
+    end_of_simulation &lt;= true;
+    wait;
+  end process
+end architecture;
+</content>
+  <description>vhdl template</description>
+</snippet>
